@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
+from django.conf import settings
+from pathlib import Path
+
+
+from .tasks import update_user
 
 
 # Create your models here.
@@ -34,25 +39,22 @@ class BorgRepository(models.Model):
         return f"BorgRepository '{self.user.username}' - '{self.name}' ({self.pk})"
 
     @property
-    def username(self) -> str:
-        """Returns the username of the linux user account for this user."""
-        return f"u-{self.pk}"
+    def path(self) -> Path:
+        return settings.BACKUP_BORG_DIR / str(self.user.pk) / str(self.pk)
 
     @property
     def repo_url(self) -> str:
         return f"{settings.BACKUP_USER}@{settings.BACKUP_REPO_HOST}:{self.user.pk}/{self.pk}"
 
     def save(self):
-        from .tasks import update_user
 
-        update_user.enqueue(user_pk=self.user.pk)
         super().save()
+        update_user.enqueue()
 
     def delete(self):
-        from .tasks import update_user
 
         super().delete()
-        update_user.enqueue(user_pk=self.user.pk)
+        update_user.enqueue()
 
 
 class Voucher(models.Model):
