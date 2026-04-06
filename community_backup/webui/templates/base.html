@@ -8,7 +8,7 @@
   </head>
   <body style="display: flex; flex-direction: column; height: 100vh">
     <header class="bg-body-tertiary">
-        <div class="container">
+        <div class="container p-2">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                 <a class="navbar-brand" href="/" >Community Backup</a>
@@ -39,19 +39,22 @@
             </nav>
         </div>
     </header>
-    <main class="container" style="flex: 1 1 auto">
+    <main class="container p-2" style="flex: 1 1 auto">
 {% block content %}
 {% endblock %}
     </main>
     <footer class="bg-body-tertiary">
-        <div class="container">
+        <div class="container p-2">
             <div class="row">
-                <ul>
-                    <li>
-                            <a href="{% url "about" %}">About</a>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "about" %}">About</a>
                     </li>
-                    <li>
-                        <a href="#">Imprint</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Imprint</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Data Protection</a>
                     </li>
                 </ul>
             </div>
