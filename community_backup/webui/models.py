@@ -16,7 +16,7 @@ class BorgRepository(models.Model):
     key = models.TextField(
         validators=[
             RegexValidator(
-                r"(ssh\-rsa|ecdsa\-sha2\-nistp256|ssh\-ed25519) ([a-zA-Z0-9\+/]+) (\S*)",
+                r"(ssh\-rsa|ecdsa\-sha2\-nistp256|ssh\-ed25519) ([a-zA-Z0-9\+/=]+) (\S*)",
                 message="not a valid SSH public key.",
             ),
         ]
