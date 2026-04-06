@@ -38,6 +38,10 @@ class BorgRepository(models.Model):
         """Returns the username of the linux user account for this user."""
         return f"u-{self.pk}"
 
+    @property
+    def repo_url(self) -> str:
+        return f"{settings.BACKUP_USER}@{settings.BACKUP_REPO_HOST}:{self.user.pk}/{self.pk}"
+
     def save(self):
         from .tasks import update_user
 
