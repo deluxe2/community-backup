@@ -15,7 +15,7 @@ class BorgRepositoryForm(forms.ModelForm):
 
 class RegisterUserForm(UserCreationForm):
     email = forms.EmailField()
-    voucher = forms.CharField(help_text="You registration voucher.")
+    voucher = forms.CharField(help_text="Your registration voucher.")
 
     def clean_voucher(self):
         obj = Voucher.objects.filter(code=self.cleaned_data["voucher"], used=False)
