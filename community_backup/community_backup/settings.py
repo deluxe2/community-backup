@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from importlib import import_module
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -127,4 +128,17 @@ STATIC_URL = "static/"
 
 TASKS = {"default": {"BACKEND": "django.tasks.backends.immediate.ImmediateBackend"}}
 
-from .configuration import *
+
+# Import settings from configuration.py
+try:
+    config_module = "community_backup.configuration"
+    module = import_module(config_module)
+
+    assert module.BACKUP_USER, "The BACKUP_USER setting is required."
+    assert module.BACKUP_REPO_HOST, "The BACKUP_REPO_HOST setting is required."
+    assert module.BACKUP_HOME_DIR, "The BACKUP_HOME_DIR setting is required."
+    assert module.BACKUP_BORG_DIR, "The BACKUP_BORG_DIR setting is required."
+    assert module.BACKUP_AUTHORIZED_KEYS, "The BACKUP_AUTHORIZED_KEYS setting is required."
+except ModuleNotFoundError:
+    print(f"could not find configuration file {config_module}")
+    exit(1)
