@@ -16,13 +16,11 @@ def sync_repos(dry_run=False):
     from .models import BorgRepository
 
     repos = BorgRepository.objects.all()
-    print(repos)
 
     repos_by_key = defaultdict(list)
     for repo in repos:
         repos_by_key[repo.key].append(repo)
 
-    print(repos)
     # create .ssh directory
     ssh_dir = settings.BACKUP_AUTHORIZED_KEYS.parent
     if not dry_run:
@@ -45,10 +43,8 @@ def sync_repos(dry_run=False):
     if not dry_run:
         authorized_keys.write_text("\n".join(commands) + "\n")
 
-    print(repos)
     # remove repositories that do no longer exist
     repo_paths = {repo.path for repo in repos}
-    print(repo_paths)
     for user_dir in settings.BACKUP_BORG_DIR.iterdir():
         print(user_dir)
         for dir in user_dir.iterdir():
