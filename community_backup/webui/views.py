@@ -41,9 +41,14 @@ class MarkdownView(TemplateView):
         return context
 
 
-class AboutView(MarkdownView):
+class DataProtectionView(MarkdownView):
     template_name = "markdown.html"
-    md = "about.md"
+    md = "dataprotection.md"
+
+
+class ImprintView(MarkdownView):
+    template_name = "markdown.html"
+    md = "imprint.md"
 
 
 class BorgView(LoginRequiredMixin, ListView):

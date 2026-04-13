@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class<div class="d-flex">
-      <h1>Your Borg Repositories</h1>
+<div class="d-flex">
+  <h1>Your Borg Repositories</h1>
   <div class="p-2 ms-auto">
     <a class="btn btn-primary" href="{% url 'borg_add' %}" role="button">Add Repository</a>
   </div>
 </div>
 
+<row>
+<p>Create a borg repository by specifying a name and the SSH public key that is allowed to access this repository. The name is only for your convenience. To set up the repository please follow the <a href="https://borgbackup.readthedocs.io/en/stable/">BorgBackup documentation</a>. There is also a <a href="https://borgbackup.readthedocs.io/en/stable/quickstart.html">Quick start guide</a> available.
+  <b>Always use encrypted backups!</b></p>
+</row>
 
 <table class="table table-striped table-hover">
   <thead>
@@ -28,6 +32,8 @@
 {% endfor %}
   </tbody>
 </table>
+
+
 
 
 {% endblock %}

@@ -17,5 +17,5 @@ urlpatterns = [
         name="borg_delete",
     ),
     path("register/", views.RegisterUserView.as_view(), name="register"),
-    path("about/", views.AboutView.as_view(), name="about"),
+    path("imprint/", views.ImprintView.as_view(), name="imprint"),
 ]

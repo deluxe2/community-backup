@@ -128,6 +128,7 @@ STATIC_URL = "static/"
 
 TASKS = {"default": {"BACKEND": "django.tasks.backends.immediate.ImmediateBackend"}}
 
+STATIC_ROOT = BASE_DIR.parent.parent / "static"
 
 # Import settings from configuration.py
 try:
@@ -139,6 +140,13 @@ try:
     assert module.BACKUP_HOME_DIR, "The BACKUP_HOME_DIR setting is required."
     assert module.BACKUP_BORG_DIR, "The BACKUP_BORG_DIR setting is required."
     assert module.BACKUP_AUTHORIZED_KEYS, "The BACKUP_AUTHORIZED_KEYS setting is required."
+
 except ModuleNotFoundError:
     print(f"could not find configuration file {config_module}")
     exit(1)
+
+BACKUP_USER = module.BACKUP_USER
+BACKUP_REPO_HOST = module.BACKUP_REPO_HOST
+BACKUP_HOME_DIR = module.BACKUP_HOME_DIR
+BACKUP_BORG_DIR = module.BACKUP_BORG_DIR
+BACKUP_AUTHORIZED_KEYS = module.BACKUP_AUTHORIZED_KEYS
