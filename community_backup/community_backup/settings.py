@@ -79,17 +79,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "community_backup.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -139,7 +128,9 @@ try:
     assert module.BACKUP_REPO_HOST, "The BACKUP_REPO_HOST setting is required."
     assert module.BACKUP_HOME_DIR, "The BACKUP_HOME_DIR setting is required."
     assert module.BACKUP_BORG_DIR, "The BACKUP_BORG_DIR setting is required."
-    assert module.BACKUP_AUTHORIZED_KEYS, "The BACKUP_AUTHORIZED_KEYS setting is required."
+    assert module.BACKUP_AUTHORIZED_KEYS, (
+        "The BACKUP_AUTHORIZED_KEYS setting is required."
+    )
 
 except ModuleNotFoundError:
     print(f"could not find configuration file {config_module}")
@@ -150,3 +141,4 @@ BACKUP_REPO_HOST = module.BACKUP_REPO_HOST
 BACKUP_HOME_DIR = module.BACKUP_HOME_DIR
 BACKUP_BORG_DIR = module.BACKUP_BORG_DIR
 BACKUP_AUTHORIZED_KEYS = module.BACKUP_AUTHORIZED_KEYS
+DATABASES = module.DATABASES

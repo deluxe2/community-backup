@@ -6,3 +6,10 @@ BACKUP_BORG_DIR = BACKUP_HOME_DIR / "borg"
 BACKUP_AUTHORIZED_KEYS = BACKUP_HOME_DIR / ".ssh" / "authorized_keys"
 BACKUP_USER = "borg"
 BACKUP_REPO_HOST = "backup.example.com"
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "/path/to/the/db.sqlite3",
+    }
+}
