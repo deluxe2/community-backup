@@ -20,11 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-_53=1gp5m=j+ienpcguini#xczk^d+&jx*#@z+2837+_-0=+$z"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = [
     "*",
@@ -124,6 +119,7 @@ try:
     config_module = "community_backup.configuration"
     module = import_module(config_module)
 
+    assert module.SECRET_KEY, "The Django SECRET is required."
     assert module.BACKUP_USER, "The BACKUP_USER setting is required."
     assert module.BACKUP_REPO_HOST, "The BACKUP_REPO_HOST setting is required."
     assert module.BACKUP_HOME_DIR, "The BACKUP_HOME_DIR setting is required."
@@ -142,3 +138,6 @@ BACKUP_HOME_DIR = module.BACKUP_HOME_DIR
 BACKUP_BORG_DIR = module.BACKUP_BORG_DIR
 BACKUP_AUTHORIZED_KEYS = module.BACKUP_AUTHORIZED_KEYS
 DATABASES = module.DATABASES
+SECRET_KEY = module.SECRET_KEY
+
+DEBUG = getattr(module, "DEBUG", False)

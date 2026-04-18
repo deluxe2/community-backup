@@ -112,3 +112,11 @@ DATABASES = {
     }
 }
 ```
+
+### SECRET_KEY
+
+The secret key used by django for session cookies and other things.
+
+### DEBUG
+
+Django debug setting.
