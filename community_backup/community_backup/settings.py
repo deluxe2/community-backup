@@ -115,7 +115,7 @@ TASKS = {"default": {"BACKEND": "django.tasks.backends.immediate.ImmediateBacken
 
 STATIC_ROOT = BASE_DIR.parent.parent / "static"
 
-RELEASE_VERSION = "0.5"
+RELEASE_VERSION = "0.6"
 
 # Import settings from configuration.py
 try:
