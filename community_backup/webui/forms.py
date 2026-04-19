@@ -10,7 +10,7 @@ class BorgRepositoryForm(forms.ModelForm):
     class Meta:
         fields = ["name", "key", "user"]
         model = BorgRepository
-        widgets = {"user": forms.HiddenInput()}
+        widgets = {"user": forms.HiddenInput(), "key": forms.TextInput()}
 
 
 class RegisterUserForm(UserCreationForm):

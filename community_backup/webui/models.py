@@ -21,7 +21,7 @@ class BorgRepository(models.Model):
     key = models.TextField(
         validators=[
             RegexValidator(
-                r"(ssh\-rsa|ecdsa\-sha2\-nistp256|ssh\-ed25519) ([a-zA-Z0-9\+/=]+) (\S*)",
+                r"^(ssh\-rsa|ecdsa\-sha2\-nistp256|ssh\-ed25519) ([a-zA-Z0-9\+/=]+)( ([\S ]*))?$",
                 message="not a valid SSH public key.",
             ),
         ]
@@ -46,15 +46,54 @@ class BorgRepository(models.Model):
     def repo_url(self) -> str:
         return f"{settings.BACKUP_USER}@{settings.BACKUP_REPO_HOST}:{self.user.pk}/{self.pk}"
 
-    def save(self):
+    def save(self, *args, **kwargs):
 
-        super().save()
+        super().save(*args, **kwargs)
         update_user.enqueue()
 
     def delete(self):
 
         super().delete()
         update_user.enqueue()
+
+    @property
+    def key_type(self) -> str:
+        return self.key.split(" ", 1)[0].strip()
+
+    @property
+    def key_value(self) -> str:
+        return self.key.split(" ", 2)[1].strip()
+
+    @property
+    def key_comment(self) -> str | None:
+        splits = self.key.split(" ", 2)
+        if len(splits) == 3:
+            return splits[2].strip()
+        return None
+
+    def truncated_key(self, length: int = 60):
+        """
+        Returns a truncated version of the key for display purposes.
+        The Key type and the comment are retained as much as possible.
+        """
+
+        # check how long the truncated part of the key may be at most.
+        max_len = length - len(self.key_type) - 1
+        if self.key_comment:
+            max_len = max_len - len(self.key_comment) - 1
+
+        if len(self.key_value) > max_len:
+            max_len -= 1  # remove one character if we add an ellipsis
+            trunc_key = self.key_value[:max_len] + "…"
+        else:
+            trunc_key = self.key_value
+
+        output = f"{self.key_type} {trunc_key}"
+
+        if self.key_comment:
+            output += f" {self.key_comment}"
+
+        return output
 
 
 class Voucher(models.Model):

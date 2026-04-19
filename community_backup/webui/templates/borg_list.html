@@ -24,7 +24,7 @@
 {% for repo in object_list %}
     <tr>
       <td>{{ repo.name }}</td>
-      <td><code>{{ repo.key | truncatechars:40 }}</code></td>
+      <td><code>{{ repo.truncated_key }}</code></td>
       <td><code>{{ repo.repo_url}}</code></td>
       <td><a href="{% url 'borg_update' pk=repo.pk %}" class="btn btn-warning btn-sm">Edit</a>
       <a href="{% url 'borg_delete' pk=repo.pk %}" class="btn btn-danger btn-sm">Delete</a></td>

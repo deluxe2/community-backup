@@ -8,8 +8,6 @@ from django.conf import settings
 
 logger = getLogger("deployments")
 
-# sync users
-
 
 def sync_repos(dry_run=False):
     """Synchronize the repos"""
@@ -19,7 +17,7 @@ def sync_repos(dry_run=False):
 
     repos_by_key = defaultdict(list)
     for repo in repos:
-        repos_by_key[repo.key].append(repo)
+        repos_by_key[f"{repo.key_type} {repo.key_value}"].append(repo)
 
     # create .ssh directory
     ssh_dir = settings.BACKUP_AUTHORIZED_KEYS.parent
