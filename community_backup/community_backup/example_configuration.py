@@ -19,3 +19,5 @@ SECRET_KEY = "change me!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
+
+MARKDOWN_PAGE_DIR = Path("./custom_md/")

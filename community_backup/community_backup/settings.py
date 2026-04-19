@@ -130,6 +130,7 @@ try:
     assert module.BACKUP_AUTHORIZED_KEYS, (
         "The BACKUP_AUTHORIZED_KEYS setting is required."
     )
+    assert module.MARKDOWN_PAGE_DIR, "The MARKDOWN_PAGE_DIR setting is required."
 
 except ModuleNotFoundError:
     print(f"could not find configuration file {config_module}")
@@ -142,5 +143,6 @@ BACKUP_BORG_DIR = module.BACKUP_BORG_DIR
 BACKUP_AUTHORIZED_KEYS = module.BACKUP_AUTHORIZED_KEYS
 DATABASES = module.DATABASES
 SECRET_KEY = module.SECRET_KEY
+MARKDOWN_PAGE_DIR = module.MARKDOWN_PAGE_DIR
 
 DEBUG = getattr(module, "DEBUG", False)

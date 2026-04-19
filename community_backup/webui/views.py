@@ -2,12 +2,11 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.conf import settings
 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import BaseUserCreationForm
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-
-from django.template.loader import get_template
 
 from django.core.exceptions import ValidationError
 import markdown2
@@ -36,7 +35,8 @@ class MarkdownView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        source = get_template(self.md).template.source
+
+        source = (settings.MARKDOWN_PAGE_DIR / self.md).read_text()
         context["markdown_content"] = markdown2.markdown(source)
         return context
 

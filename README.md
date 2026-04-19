@@ -78,6 +78,16 @@ Create a superuser account
 
 ```
 
+## Custom pages
+
+Some pages are specific to your installation. E.g. an imprint.
+
+Those files are markdown files that are rendered as HTML. You have to supply them and put them into the `MARKDOWN_PAGE_DIR`.
+
+The following files are expected:
+
+* `imprint.md` with your imprint information.
+
 ## Settings
 
 ### BACKUP_USER
@@ -120,3 +130,7 @@ The secret key used by django for session cookies and other things.
 ### DEBUG
 
 Django debug setting.
+
+### MARKDOWN_PAGE_DIR
+
+`MARKDOWN_PAGE_DIR` is the directory where customized markdown files are put. This directory is required.
