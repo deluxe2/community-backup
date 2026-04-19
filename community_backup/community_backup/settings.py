@@ -66,6 +66,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "community_backup.context_processors.release_version",
             ],
         },
     },
@@ -113,6 +114,8 @@ STATIC_URL = "static/"
 TASKS = {"default": {"BACKEND": "django.tasks.backends.immediate.ImmediateBackend"}}
 
 STATIC_ROOT = BASE_DIR.parent.parent / "static"
+
+RELEASE_VERSION = "0.5"
 
 # Import settings from configuration.py
 try:
