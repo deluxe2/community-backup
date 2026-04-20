@@ -134,3 +134,7 @@ Django debug setting.
 ### MARKDOWN_PAGE_DIR
 
 `MARKDOWN_PAGE_DIR` is the directory where customized markdown files are put. This directory is required.
+
+### BACKUP_MANAGE_PY
+
+`BACKUP_MANAGE_PY` is the command to run the `manage.py` file, including e.g. a Python interpreter, venv, etc. This must be a `pathlib.Path`

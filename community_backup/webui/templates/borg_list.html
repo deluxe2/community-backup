@@ -18,6 +18,7 @@
     <th>Name</th>
     <th>Key</th>
     <th>Repo-URL</th>
+    <th>Quota (used/total)</th>
     <th></th>
   </thead>
   <tbody>
@@ -25,7 +26,8 @@
     <tr>
       <td>{{ repo.name }}</td>
       <td><code>{{ repo.truncated_key }}</code></td>
-      <td><code>{{ repo.repo_url}}</code></td>
+      <td><code>{{ repo.repo_url }}</code></td>
+      <td>{% if repo.used_quota < 0 %}not initialized{% else %}{{ repo.used_quota }}/{{ repo.quota }} GB{% endif %}</td>
       <td><a href="{% url 'borg_update' pk=repo.pk %}" class="btn btn-warning btn-sm">Edit</a>
       <a href="{% url 'borg_delete' pk=repo.pk %}" class="btn btn-danger btn-sm">Delete</a></td>
     </tr>

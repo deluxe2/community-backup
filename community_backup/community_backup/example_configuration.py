@@ -21,3 +21,4 @@ SECRET_KEY = "change me!"
 # DEBUG = True
 
 MARKDOWN_PAGE_DIR = Path("./custom_md/")
+BACKUP_MANAGE_PY = Path("/path/to/venv/bin/python /path/to/community_backup/manage.py")

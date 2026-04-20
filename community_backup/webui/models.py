@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.conf import settings
 from pathlib import Path
+import msgpack
 
 
 from .tasks import update_user
@@ -27,6 +28,9 @@ class BorgRepository(models.Model):
         ]
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    quota = models.IntegerField(default=500)
+    used_quota = models.IntegerField(default=-1)
 
     class Meta:
         constraints = [
@@ -94,6 +98,21 @@ class BorgRepository(models.Model):
             output += f" {self.key_comment}"
 
         return output
+
+    def refresh_quota(self):
+        hints_files = self.path.glob("hints.*")
+
+        try:
+            hint = next(hints_files)
+            data = hint.open(mode="rb").read()
+
+            unpacked = msgpack.unpackb(data, strict_map_key=False, raw=True)
+            quota_used = unpacked[b"storage_quota_use"]
+
+            self.used_quota = int(quota_used / 10**9)
+        except StopIteration:
+            # No hints file found, therefore the repo is probably not initialized
+            self.used_quota = -1
 
 
 class Voucher(models.Model):

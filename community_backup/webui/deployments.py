@@ -34,8 +34,10 @@ def sync_repos(dry_run=False):
     commands = []
     for key, repositories in repos_by_key.items():
         repo_paths = [f"--restrict-to-repository {repo.path}" for repo in repositories]
+        quota = max(repo.quota for repo in repositories)
+        ids = [str(repo.id) for repo in repositories]
         commands.append(
-            f"""command="cd {str(settings.BACKUP_BORG_DIR)}; borg serve {" ".join(repo_paths)} --storage-quota=500G",restrict {key}"""
+            f"""command="cd {str(settings.BACKUP_BORG_DIR)}; borg serve {" ".join(repo_paths)} --storage-quota={quota}G;{settings.BACKUP_MANAGE_PY} update_used_quota --repository-id {" ".join(ids)}",restrict {key}"""
         )
 
     if not dry_run:
