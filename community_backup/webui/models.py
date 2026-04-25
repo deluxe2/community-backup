@@ -48,7 +48,7 @@ class BorgRepository(models.Model):
 
     @property
     def repo_url(self) -> str:
-        return f"{settings.BACKUP_USER}@{settings.BACKUP_REPO_HOST}:{self.user.pk}/{self.pk}"
+        return f"ssh://{settings.BACKUP_USER}@{settings.BACKUP_REPO_HOST}/./{self.user.pk}/{self.pk}"
 
     def save(self, *args, **kwargs):
 
