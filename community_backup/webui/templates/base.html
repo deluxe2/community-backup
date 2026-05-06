@@ -67,6 +67,17 @@
                         </li>
                     </ul>
                 </div>
+                {% if ADDITIONAL_FOOTER_NAV_ITEMS %}
+                <div class="col-3">
+                    <ul class="nav flex-column">
+                        {% for item in ADDITIONAL_FOOTER_NAV_ITEMS %}
+                        <li class="nav-item">
+                            {{item|safe}}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             </div>
         </div>
     </footer>

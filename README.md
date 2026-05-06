@@ -138,3 +138,11 @@ Django debug setting.
 ### BACKUP_MANAGE_PY
 
 `BACKUP_MANAGE_PY` is the command to run the `manage.py` file, including e.g. a Python interpreter, venv, etc. This must be a `pathlib.Path`
+
+### ADDITIONAL_FOOTER_NAV_ITEMS
+
+`ADDITIONAL_FOOTER_NAV_ITEMS` allows you to add additional links to the footer. This is a `list[str]`. Each item gets rendered as is into a `<li class=nav-item>`. So usually you want to continue the proper Bootstrap styling in the lst. E.g.:
+
+```python
+ADDITIONAL_FOOTER_NAV_ITEMS = ["""<a class="nav-link" href="https://example.com/>Example Link</a>""",]
+```

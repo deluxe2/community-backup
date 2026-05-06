@@ -67,6 +67,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "community_backup.context_processors.release_version",
+                "community_backup.context_processors.additional_footer_nav_items",
             ],
         },
     },
@@ -148,3 +149,4 @@ MARKDOWN_PAGE_DIR = module.MARKDOWN_PAGE_DIR
 BACKUP_MANAGE_PY = module.BACKUP_MANAGE_PY
 
 DEBUG = getattr(module, "DEBUG", False)
+ADDITIONAL_FOOTER_NAV_ITEMS = getattr(module, "ADDITIONAL_FOOTER_NAV_ITEMS", list())
