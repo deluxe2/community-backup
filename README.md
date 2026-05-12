@@ -146,3 +146,25 @@ Django debug setting.
 ```python
 ADDITIONAL_FOOTER_NAV_ITEMS = ["""<a class="nav-link" href="https://example.com/>Example Link</a>""",]
 ```
+
+### BORG_SERVER_PUBKEYS
+
+A list of the SSH public keys and their hashes to verify the server a User is connecting to.
+This is a list of tuples, containing the key and it's hash.
+
+```python
+BORG_SERVER_PUBKEYS = [
+    (
+        "ecdsa-sha2-nistp256 AAAAASDJIASKJDASD root@example.com",
+        "256 SHA256:sTbOK9NvP1uUEixgUT8KUiYrY8J/DbK+jR39lwcT8Zw root@example.com (ECDSA)",
+    ),
+    (
+        "ssh-ed25519 AAAAasdiwdkjasdijwklajsdijasd root@example.com",
+        "256 SHA256:hPbWwRxNr1mFHZKYjcysnay1cQGQsOmDBvkA3Pzo4YY root@example.com (ED25519)",
+    ),
+    (
+        "ssh-rsa AAAABasdlkjasdiualksjd root@example.com",
+        "3072 SHA256:deuPTR8Hcc1LP7DHqAp91EINdLBQoco2IeMldIahamQ root@example.com (RSA)",
+    ),
+]
+```

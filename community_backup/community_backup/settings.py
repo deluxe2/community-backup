@@ -68,6 +68,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "community_backup.context_processors.release_version",
                 "community_backup.context_processors.additional_footer_nav_items",
+                "community_backup.context_processors.borg_server_pubkeys",
             ],
         },
     },
@@ -150,3 +151,4 @@ BACKUP_MANAGE_PY = module.BACKUP_MANAGE_PY
 
 DEBUG = getattr(module, "DEBUG", False)
 ADDITIONAL_FOOTER_NAV_ITEMS = getattr(module, "ADDITIONAL_FOOTER_NAV_ITEMS", list())
+BORG_SERVER_PUBKEYS = getattr(module, "BORG_SERVER_PUBKEYS", list())
