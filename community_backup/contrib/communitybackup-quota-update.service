@@ -1,0 +1,9 @@
+[Unit]
+Description=Update the used quota
+
+[Service]
+User=borg
+Group=borg
+WorkingDirectory=/opt/community_backup/community-backup/community_backup/
+ExecStart=/opt/community_backup/venv/bin/python manage.py update_used_quota 
+PrivateTmp=true

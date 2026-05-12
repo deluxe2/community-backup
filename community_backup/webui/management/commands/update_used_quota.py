@@ -10,8 +10,6 @@ class Command(BaseCommand):
         parser.add_argument("--repository-id", type=int, nargs="+")
 
     def handle(self, *args, **options):
-        print(options)
-
         qs = BorgRepository.objects.all()
 
         if options.get("user_id"):
@@ -19,8 +17,6 @@ class Command(BaseCommand):
 
         if options.get("repository_id"):
             qs = qs.filter(pk__in=options.get("repository_id"))
-
-        print(qs)
 
         for repo in qs:
             repo.refresh_quota()

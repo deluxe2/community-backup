@@ -78,6 +78,14 @@ Create a superuser account
 
 ```
 
+### Repository Quota Updates
+
+The repository quotas in the UI are updated after each backup.
+To update the quota during an operation the `update_used_quota` management command can be executed on a regular basis.
+
+There are example configs for systemd-timers in `contrib/communitybackup-quota-update.service` and `contrib/communitybackup-quota-update.timer`. Adjust the paths and the timers to your needs.
+
+
 ## Custom pages
 
 Some pages are specific to your installation. E.g. an imprint.
