@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     "webui",
     "crispy_forms",
-    "crispy_bootstrap5",
+    "crispy_bulma",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bulma"
 
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bulma"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

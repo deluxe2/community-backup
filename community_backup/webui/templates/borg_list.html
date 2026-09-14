@@ -4,7 +4,7 @@
 <div class="d-flex">
   <h1>Your Borg Repositories</h1>
   <div class="p-2 ms-auto">
-    <a class="btn btn-primary" href="{% url 'borg_add' %}" role="button">Add Repository</a>
+    <a class="button is-primary" href="{% url 'borg_add' %}" role="button">Add Repository</a>
   </div>
 </div>
 
@@ -13,7 +13,8 @@
   <b>Always use encrypted backups!</b></p>
 </row>
 
-<table class="table table-striped table-hover">
+<section>
+<table class="table is-striped is-fullwidth is-hoverable">
   <thead>
     <th>Name</th>
     <th>Key</th>
@@ -28,29 +29,31 @@
       <td style="word-break: break-all"><code>{{ repo.truncated_key }}</code></td>
       <td style="word-break: break-all"><code>{{ repo.repo_url }}</code></td>
       <td>{% if repo.used_quota < 0 %}not initialized{% else %}{{ repo.used_quota }}/{{ repo.quota }} GB{% endif %}</td>
-      <td><a href="{% url 'borg_update' pk=repo.pk %}" class="btn btn-warning btn-sm">Edit</a>
-      <a href="{% url 'borg_delete' pk=repo.pk %}" class="btn btn-danger btn-sm">Delete</a></td>
+      <td><a href="{% url 'borg_update' pk=repo.pk %}" class="button is-warning is-small">Edit</a>
+      <a href="{% url 'borg_delete' pk=repo.pk %}" class="button is-danger is-small">Delete</a></td>
     </tr>
 {% endfor %}
   </tbody>
 </table>
+</section>
 
 {% if BORG_SERVER_PUBKEYS %}
+<section>
 <div class="card">
-  <div class="card-header">
-    <h4>Borg Server Public Keys</h4>
-  </div>
-  <ul class="list-group list-group-flush">
+  <header class="card-header">
+    <p class="card-header-title">Borg Server Public Keys</p>
+  </header>
+  <div class="card-content">
   {% for key, fingerprint in BORG_SERVER_PUBKEYS %}
-    <li class="list-group-item">
       <span style="word-break: break-all"><code>{{ key }}</code></span><br>
       <span style="word-break: break-all"><code>{{ fingerprint }}</code></span>
-    </li>
+      {% if not forloop.last %}
+      <hr>
+      {% endif %}
   {% endfor %}
-  </ul>
+  </div>
 </div>
+</section>
 {% endif %}
-
-
 
 {% endblock %}
