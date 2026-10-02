@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from webui.models import BorgRepository
+from django.test import Client
 
 
 class BorgRepositoryTestCase(TestCase):
@@ -52,3 +53,38 @@ class BorgRepositoryTestCase(TestCase):
             user=user,
         )
         repo.full_clean()
+
+
+class UserDeleteTestCase(TestCase):
+    def test_user_delete(self):
+        password = "12345"
+        user = User.objects.create_user(username="deleteme", password=password)
+
+        self.assertEqual(
+            BorgRepository.objects.filter(name="test_repo_for_deletion").count(), 0
+        )
+
+        # create a repository
+        BorgRepository.objects.create(
+            name="test_repo_for_deletion",
+            key="ssh-ed25519 lkjasdlkjaslkdjaslkjd",
+            user=user,
+        )
+
+        # create a session for the user
+        c = Client()
+
+        # log in
+        self.assertTrue(c.login(username=user.username, password=password))
+
+        # delete the account
+
+        response = c.post("/delete/", {"confirm": "on"}, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+        # check that there is nothing left of the user
+        self.assertEqual(User.objects.filter(username="deleteme").count(), 0)
+
+        self.assertEqual(
+            BorgRepository.objects.filter(name="test_repo_for_deletion").count(), 0
+        )

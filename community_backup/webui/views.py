@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 import markdown2
 
 from .models import BorgRepository, Voucher
-from .forms import BorgRepositoryForm, RegisterUserForm
+from .forms import BorgRepositoryForm, RegisterUserForm, DeleteUserForm
 
 
 class UserOwnsRepositoryMixin(UserPassesTestMixin):
@@ -67,6 +67,17 @@ class RegisterUserView(FormView):
 
     def form_valid(self, form):
         form.save()
+        return super().form_valid(form)
+
+
+class DeleteUserView(LoginRequiredMixin, FormView):
+    template_name = "delete.html"
+    form_class = DeleteUserForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        user = self.request.user
+        user.delete()
         return super().form_valid(form)
 
 

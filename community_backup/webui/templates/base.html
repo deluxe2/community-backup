@@ -58,6 +58,7 @@
                                     <button type="submit" class="navbar-item">Logout</button>
                                 </form>
                                 <a class="navbar-item" href="{% url 'password_change' %}">Change Password</a>
+                                <a class="navbar-item" href="{% url 'delete' %}">Delete Account</a>
                                 {% if user.is_staff %}
                                 <hr class="navbar-divider">
                                 <a class="navbar-item" href="{% url 'admin:index' %}">Admin</a>

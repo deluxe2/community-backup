@@ -38,3 +38,7 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         fields = ("username", "email")
+
+
+class DeleteUserForm(forms.Form):
+    confirm = forms.BooleanField(label="I want to delete my account")
