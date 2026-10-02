@@ -1,4 +1,4 @@
-# Community Backup
+# ![Logo](community_backup/static/webui/logo.png) Community Backup
 
 A website to manage backup repositories.
 
