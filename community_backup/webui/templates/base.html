@@ -4,6 +4,7 @@
   <head>
         <link rel="stylesheet" href="{% static 'vendored/css/bulma.min.css' %}">
     <link rel="stylesheet" href="{% static 'webui/css/webui.css' %}">
+    <link rel="icon" href="{% static 'webui/logo.png'%}" type="image/png"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Community Backup</title>
@@ -34,7 +35,7 @@
   <body style="display: flex; flex-direction: column; height: 100vh">
     <nav class="navbar" role="navigation" aria-label="main navigation" >
         <div class="navbar-brand">
-            <a class="navbar-item" href="/">Community Backup</a>
+                <a class="navbar-item" href="/"><img id="logo" class="pixelart" src="{% static 'webui/logo.png' %}" alt="The logo if Community Backup, a pixelated hard disk platter and head."/> Community Backup</a>
             <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>

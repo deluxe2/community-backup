@@ -1,3 +1,12 @@
 h1 {
   font-size: 2rem
-};
+}
+
+.pixelart {
+  image-rendering: crisp-edges;
+}
+
+#logo {
+  min-width: 32px;
+  min-height: 32px;
+}
