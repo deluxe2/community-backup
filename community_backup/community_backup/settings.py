@@ -116,6 +116,9 @@ STATIC_URL = "static/"
 TASKS = {"default": {"BACKEND": "django.tasks.backends.immediate.ImmediateBackend"}}
 
 STATIC_ROOT = BASE_DIR.parent.parent / "static"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 RELEASE_VERSION = "0.12"
 

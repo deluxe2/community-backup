@@ -2,13 +2,16 @@
 
 {% load crispy_forms_tags %}
 {% block content %}
-  <form method="post">
-  {% csrf_token %}
-  {{ form|crispy }}
-    {% if form.initial %}
-  <input class="button is-primary" type="submit" value="Save">
-    {% else %}
-  <input class="button is-primary" type="submit" value="Add">
-    {% endif %}
-  </form>
+  <section class="section">
+    <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+      {% if form.initial %}
+    <input class="button is-primary" type="submit" value="Save">
+      {% else %}
+    <input class="button is-primary" type="submit" value="Add">
+      {% endif %}
+    <a class="button" href="{% url 'borg_list' %}">Cancel</a>
+    </form>
+  </section>
 {% endblock %}

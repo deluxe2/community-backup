@@ -1,19 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="d-flex">
-  <h1>Your Borg Repositories</h1>
-  <div class="p-2 ms-auto">
-    <a class="button is-primary" href="{% url 'borg_add' %}" role="button">Add Repository</a>
+<nav class="level">
+  <div class="level-left">
+  <h1 class="level-item">Your Borg Repositories</h1>
   </div>
-</div>
+  <div class="level-right">
+    <a class="level-item button is-primary" href="{% url 'borg_add' %}" role="button">Add Repository</a>
+  </div>
+</nav>
 
-<row>
+<section class="section">
 <p>Create a borg repository by specifying a name and the SSH public key that is allowed to access this repository. The name is only for your convenience. To set up the repository please follow the <a href="https://borgbackup.readthedocs.io/en/stable/">BorgBackup documentation</a>. There is also a <a href="https://borgbackup.readthedocs.io/en/stable/quickstart.html">Quick start guide</a> available.
   <b>Always use encrypted backups!</b></p>
-</row>
+</section>
 
-<section>
+<section class="section">
 <table class="table is-striped is-fullwidth is-hoverable">
   <thead>
     <th>Name</th>
@@ -38,7 +40,7 @@
 </section>
 
 {% if BORG_SERVER_PUBKEYS %}
-<section>
+<section class="section">
 <div class="card">
   <header class="card-header">
     <p class="card-header-title">Borg Server Public Keys</p>

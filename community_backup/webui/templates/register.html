@@ -2,17 +2,18 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<section class="section">
+    {% if form.errors %}
+            {% for error in form.errors %}
+    <p>{{ error }}</p>
+        {% endfor %}
+    {% endif %}
 
-{% if form.errors %}
-        {% for error in form.errors %}
-<p>{{ error }}</p>
-    {% endfor %}
-{% endif %}
-
-<form method="post" action="{% url 'register' %}">
-    {% csrf_token %}
-    {{ form|crispy }}
-<input class="button is-primary" type="submit" value="Register">
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+    <input class="button is-primary" type="submit" value="Register">
 </form>
 
+</section>
 {% endblock %}
