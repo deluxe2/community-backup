@@ -209,3 +209,4 @@ tags
 # End of https://www.toptal.com/developers/gitignore/api/vim,venv,python
 
 community_backup/community_backup/configuration.py
+.ssh/
