@@ -2,6 +2,9 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<h1>Delete your Account</h1>
+
+<section class="section">
 
 {% if next %}
     {% if user.is_authenticated %}
@@ -15,8 +18,9 @@
 <form method="post" action="{% url 'delete' %}">
     {% csrf_token %}
     {{ form|crispy }}
-<input class="button is-danger" type="submit" value="Delete Account">
-<input type="hidden" name="next" value="{{ next }}">
+  <input class="button is-danger" type="submit" value="Delete Account">
+  <input type="hidden" name="next" value="{{ next }}">
 </form>
+</section>
 
 {% endblock %}
