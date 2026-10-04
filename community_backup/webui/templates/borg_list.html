@@ -31,8 +31,12 @@
       <td style="word-break: break-all"><code>{{ repo.truncated_key }}</code></td>
       <td style="word-break: break-all"><code>{{ repo.repo_url }}</code></td>
       <td>{% if repo.used_quota < 0 %}not initialized{% else %}{{ repo.used_quota }}/{{ repo.quota }} GB{% endif %}</td>
-      <td><a href="{% url 'borg_update' pk=repo.pk %}" class="button is-warning is-small">Edit</a>
-      <a href="{% url 'borg_delete' pk=repo.pk %}" class="button is-danger is-small">Delete</a></td>
+      <td>
+          <div class="field is-grouped">
+            <a href="{% url 'borg_update' pk=repo.pk %}" class="button is-warning is-small">Edit</a>
+            <a href="{% url 'borg_delete' pk=repo.pk %}" class="button is-danger is-small">Delete</a>
+          </div>
+      </td>
     </tr>
 {% endfor %}
   </tbody>
