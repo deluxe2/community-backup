@@ -95,6 +95,7 @@ Those files are markdown files that are rendered as HTML. You have to supply the
 The following files are expected:
 
 * `imprint.md` with your imprint information.
+* `privacy_policy.md` with your privacy policy.
 
 ## Settings
 

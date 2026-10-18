@@ -51,6 +51,11 @@ class ImprintView(MarkdownView):
     md = "imprint.md"
 
 
+class PrivacyPolicyView(MarkdownView):
+    template_name = "markdown.html"
+    md = "privacy_policy.md"
+
+
 class BorgView(LoginRequiredMixin, ListView):
     template_name = "borg_list.html"
     content_object_name = "borg_repositories"

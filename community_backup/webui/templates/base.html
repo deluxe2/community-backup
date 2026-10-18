@@ -86,7 +86,14 @@
     <footer class="footer">
         <div class="columns container">
             <div class="column">
-                <a href="{% url 'imprint' %}">Imprint</a>
+                <ul>
+                    <li>
+                        <a href="{% url 'imprint' %}">Imprint</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                    </li>
+                </ul>
             </div>
             <div class="column">
                 <a href="https://git.srvspace.net/jo/community-backup">Source Code</a>

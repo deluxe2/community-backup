@@ -19,4 +19,5 @@ urlpatterns = [
     path("register/", views.RegisterUserView.as_view(), name="register"),
     path("delete/", views.DeleteUserView.as_view(), name="delete"),
     path("imprint/", views.ImprintView.as_view(), name="imprint"),
+    path("privacy-policy/", views.PrivacyPolicyView.as_view(), name="privacy_policy"),
 ]
