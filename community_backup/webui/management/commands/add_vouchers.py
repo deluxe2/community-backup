@@ -11,14 +11,7 @@ class Command(BaseCommand):
         parser.add_argument("amount", type=int)
 
     def handle(self, *args, **options):
-        unabmigous_characters = "abcdefghijkmnopqrstuvwxyzACDEFHJKLMNPQRTUVWXY1234679"
-
-        vouchers = set()
-        while len(vouchers) < options["amount"]:
-            random_part = "".join(choices(unabmigous_characters, k=5))
-            vouchers.add(f"{options['prefix']}-{random_part}")
-
-        Voucher.objects.bulk_create(Voucher(code=v) for v in vouchers)
+        vouchers = Voucher.bulk_generate(options["prefix"], options["amount"])
 
         header = r"""\begin{document}
 \begin{center}

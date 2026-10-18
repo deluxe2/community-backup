@@ -1,10 +1,11 @@
+from random import choices
+from pathlib import Path
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.conf import settings
-from pathlib import Path
 import msgpack
-
 
 from .tasks import update_user
 
@@ -121,3 +122,20 @@ class Voucher(models.Model):
 
     def __str__(self):
         return f"Voucher '{self.code}'"
+
+    @classmethod
+    def bulk_generate(cls, prefix: str, amount: int) -> set[str]:
+        """
+        Create `amount` vouchers starting with `prefix`.
+
+        Returns a set of the voucher codes as strings.
+        """
+        unabmigous_characters = "abcdefghijkmnopqrstuvwxyzACDEFHJKLMNPQRTUVWXY1234679"
+
+        vouchers = set()
+        while len(vouchers) < amount:
+            random_part = "".join(choices(unabmigous_characters, k=5))
+            vouchers.add(f"{prefix}-{random_part}")
+
+        Voucher.objects.bulk_create(Voucher(code=v) for v in vouchers)
+        return vouchers
