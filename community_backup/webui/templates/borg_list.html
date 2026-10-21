@@ -28,8 +28,8 @@
 {% for repo in object_list %}
     <tr>
       <td>{{ repo.name }}</td>
-      <td style="word-break: break-all"><code>{{ repo.truncated_key }}</code></td>
-      <td style="word-break: break-all"><code>{{ repo.repo_url }}</code></td>
+      <td class="word-break-break-all"><code>{{ repo.truncated_key }}</code></td>
+      <td class="word-break-break-all"><code>{{ repo.repo_url }}</code></td>
       <td>{% if repo.used_quota < 0 %}not initialized{% else %}{{ repo.used_quota }}/{{ repo.quota }} GB{% endif %}</td>
       <td>
           <div class="field is-grouped">
@@ -51,8 +51,8 @@
   </header>
   <div class="card-content">
   {% for key, fingerprint in BORG_SERVER_PUBKEYS %}
-      <span style="word-break: break-all"><code>{{ key }}</code></span><br>
-      <span style="word-break: break-all"><code>{{ fingerprint }}</code></span>
+      <span class="word-break-break-all"><code>{{ key }}</code></span><br>
+      <span class="word-break-break-all"><code>{{ fingerprint }}</code></span>
       {% if not forloop.last %}
       <hr>
       {% endif %}
