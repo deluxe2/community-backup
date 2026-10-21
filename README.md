@@ -177,3 +177,13 @@ BORG_SERVER_PUBKEYS = [
     ),
 ]
 ```
+
+## Webserver Config / Content-Security-Policy
+
+This page by itself does not load external sources and does not use inline javascript/styling.
+It only loads javascript, CSS and images.
+Therefore the following Content-Security-Policy should work fine in the standard cases:
+
+```
+Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self';"
+```
