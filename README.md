@@ -20,7 +20,7 @@ apt update && apt install python3 python3-pip python3-venv borgbackup
 
 Clone the repository
 
-git clone https://git.srvspace.net/jo/community-backup.git
+git clone https://github.com/deluxe2/community-backup.git
 
 Or install from a release
 
