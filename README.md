@@ -2,6 +2,10 @@
 
 A website to manage backup repositories.
 
+> **Note:** This is a fork of [Community Backup](https://git.srvspace.net/jo/community-backup) by jo,
+> licensed under the [GNU Affero General Public License v3.0](LICENSE). This fork is distributed
+> under the same license. Changes from the original are recorded in the git history of this repository.
+
 ## Installation
 
 This installation guide assumes a Debian 13 system.
