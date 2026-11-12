@@ -3,7 +3,10 @@ from django.urls import path, reverse_lazy
 from django.views.generic import FormView
 from django import forms
 
-from .models import BorgRepository, Voucher
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+
+from .models import BorgRepository, UserLimit, Voucher
 
 
 class VoucherBulkCreateForm(forms.Form):
@@ -48,3 +51,22 @@ class VoucherAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(BorgRepository)
+
+
+class UserLimitInline(admin.StackedInline):
+    model = UserLimit
+    can_delete = False
+    verbose_name_plural = "Limits"
+
+
+class UserWithLimitAdmin(UserAdmin):
+    inlines = [*UserAdmin.inlines, UserLimitInline]
+
+
+admin.site.unregister(User)
+admin.site.register(User, UserWithLimitAdmin)
+
+
+@admin.register(UserLimit)
+class UserLimitAdmin(admin.ModelAdmin):
+    list_display = ("user", "max_repositories")

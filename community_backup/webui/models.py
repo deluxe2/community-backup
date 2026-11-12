@@ -116,6 +116,32 @@ class BorgRepository(models.Model):
             self.used_quota = -1
 
 
+def default_max_repositories() -> int:
+    return settings.DEFAULT_MAX_REPOSITORIES
+
+
+class UserLimit(models.Model):
+    """Per-user limits. Users without a row get the configured defaults."""
+
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True, related_name="limit"
+    )
+    max_repositories = models.PositiveIntegerField(
+        default=default_max_repositories,
+        help_text="Maximum number of borg repositories this user may create.",
+    )
+
+    def __str__(self):
+        return f"Limits for '{self.user.username}'"
+
+    @staticmethod
+    def max_repositories_for(user: User) -> int:
+        limit = UserLimit.objects.filter(user=user).first()
+        if limit is None:
+            return settings.DEFAULT_MAX_REPOSITORIES
+        return limit.max_repositories
+
+
 class Voucher(models.Model):
     used = models.BooleanField(default=False)
     code = models.CharField(max_length=100, unique=True)

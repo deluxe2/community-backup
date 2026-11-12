@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.core.exceptions import ValidationError
 import markdown2
 
-from .models import BorgRepository, Voucher
+from .models import BorgRepository, UserLimit, Voucher
 from .forms import BorgRepositoryForm, RegisterUserForm, DeleteUserForm
 
 
@@ -64,6 +64,14 @@ class BorgView(LoginRequiredMixin, ListView):
         data = BorgRepository.objects.filter(user=self.request.user)
         return data
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["max_repositories"] = UserLimit.max_repositories_for(self.request.user)
+        context["can_add_repository"] = (
+            context["object_list"].count() < context["max_repositories"]
+        )
+        return context
+
 
 class RegisterUserView(FormView):
     template_name = "register.html"
@@ -96,6 +104,15 @@ class BorgRepositoryCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+
+        max_repositories = UserLimit.max_repositories_for(self.request.user)
+        if BorgRepository.objects.filter(user=self.request.user).count() >= max_repositories:
+            form.add_error(
+                None,
+                f"You have reached the maximum of {max_repositories} repositories.",
+            )
+            return self.form_invalid(form)
+
         return super().form_valid(form)
 
 
