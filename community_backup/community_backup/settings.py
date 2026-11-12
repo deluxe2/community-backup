@@ -120,7 +120,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-RELEASE_VERSION = "0.15"
+RELEASE_VERSION = "0.15-fork.1"
 
 # Import settings from configuration.py
 try:
